@@ -1,0 +1,17 @@
+<div class="flex flex-col items-center">
+  <h1 class="text-5xl font-extrabold text-white mb-6 drop-shadow-lg">TodoList</h1>
+  <p class="text-lg text-gray-300 opacity-90 mb-8 max-w-md text-center">
+    Organize your tasks simply and efficiently. Start now and have full control over your day.
+  </p>
+
+  <% if user_signed_in? %> 
+    <!-- If the user is logged in -->
+    <div class="flex flex-col gap-3 items-center">
+      <%= link_to 'Organize Tasks', task_lists_path, class: "bg-blue-500 text-white py-3 px-8 rounded-full shadow-xl hover:bg-blue-400 active:bg-blue-600 transform transition-all duration-300 ease-in-out hover:scale-105 animate-pulse" %>
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'bg-red-500 text-white py-3 px-8 rounded-full shadow-xl hover:bg-red-400 active:bg-red-600 hover:scale-105' %>
+    </div>
+  <% else %>
+    <!-- If the user is not logged in -->
+    <%= link_to 'Get Started', new_user_registration_path, class: "bg-blue-500 text-white py-3 px-8 rounded-full shadow-xl hover:bg-blue-400 active:bg-blue-600 transform transition-all duration-300 ease-in-out hover:scale-105 animate-pulse" %>
+  <% end %>
+</div>

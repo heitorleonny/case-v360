@@ -1,0 +1,33 @@
+<%= form_with(model: task, url: task_list_tasks_path(@task_list)) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul class="list-disc ml-6">
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name, class: "text-white text-sm font-semibold" %>
+    <%= form.text_field :name, class: "block w-full px-4 py-3 mt-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :status, class: "text-white text-sm font-semibold" %>
+    <%= form.select :status, ["not started", "in progress", "under review", "done"], { include_blank: "Select Status" }, class: "block w-full px-4 py-3 mt-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :comment, class: "text-white text-sm font-semibold" %>
+    <%= form.text_area :comment, class: "block w-full px-4 py-3 mt-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-blue-500" %>
+  </div>
+
+  <%= form.hidden_field :task_list_id, value: @task_list.id %>
+
+  <div class="my-6">
+    <%= form.submit "Add Task", class: "w-full py-3 px-6 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+  </div>
+<% end %>
